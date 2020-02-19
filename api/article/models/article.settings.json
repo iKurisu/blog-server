@@ -1,4 +1,6 @@
 {
+  "connection": "default",
+  "collectionName": "articles",
   "info": {
     "name": "article"
   },
@@ -25,8 +27,11 @@
     "published_at": {
       "type": "date",
       "required": true
+    },
+    "slug": {
+      "type": "string",
+      "unique": true,
+      "required": false
     }
-  },
-  "connection": "default",
-  "collectionName": "articles"
+  }
 }
