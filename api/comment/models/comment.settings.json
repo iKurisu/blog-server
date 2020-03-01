@@ -1,0 +1,28 @@
+{
+  "info": {
+    "name": "comment"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "author": {
+      "model": "custom-user"
+    },
+    "replies": {
+      "collection": "comment"
+    },
+    "slug": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "richtext",
+      "minLength": 1,
+      "required": true
+    }
+  },
+  "connection": "default",
+  "collectionName": "comments"
+}
