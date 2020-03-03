@@ -1,4 +1,6 @@
 {
+  "connection": "default",
+  "collectionName": "comments",
   "info": {
     "name": "comment"
   },
@@ -10,9 +12,6 @@
     "author": {
       "model": "custom-user"
     },
-    "replies": {
-      "collection": "comment"
-    },
     "slug": {
       "type": "string",
       "required": true
@@ -21,8 +20,14 @@
       "type": "richtext",
       "minLength": 1,
       "required": true
+    },
+    "parent": {
+      "model": "comment",
+      "via": "replies"
+    },
+    "replies": {
+      "collection": "comment",
+      "via": "parent"
     }
-  },
-  "connection": "default",
-  "collectionName": "comments"
+  }
 }
