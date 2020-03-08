@@ -1,5 +1,22 @@
 "use strict";
 
+const mapReplies = async comment => {
+  const { replies, ...rest } = comment;
+
+  const promises = replies.map(async reply => {
+    const comment = await strapi.query("comment").findOne({ id: reply.id });
+
+    return comment.replies ? await mapReplies(comment) : comment;
+  });
+
+  const newReplies = await Promise.all(promises);
+
+  return {
+    ...rest,
+    replies: newReplies
+  };
+};
+
 const createComment = async (author, content, slug) => {
   return await strapi.query("comment").create({ author, content, slug });
 };
@@ -19,6 +36,12 @@ const createWithNewAuthor = async (author, content, slug) => {
  */
 
 module.exports = {
+  async find(ctx) {
+    const comments = await strapi.query("comment").find(ctx.query);
+    const newComments = await Promise.all(comments.map(mapReplies));
+
+    return newComments;
+  },
   async create(ctx) {
     const { author, content, slug } = ctx.request.body;
 
