@@ -32,6 +32,10 @@
       "type": "string",
       "unique": true,
       "required": false
+    },
+    "description": {
+      "type": "text",
+      "required": true
     }
   }
 }
