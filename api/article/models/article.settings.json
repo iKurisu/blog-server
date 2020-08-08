@@ -33,6 +33,9 @@
       "unique": true,
       "required": false
     },
+    "category": {
+      "model": "category"
+    },
     "description": {
       "type": "text",
       "required": true
