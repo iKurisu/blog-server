@@ -13,9 +13,9 @@ module.exports = {
     if (options.method === "insert") {
       model.set("slug", slugify(attrs.title));
     } else if (options.method === "update") {
-      attrs.slug = slugify(attrs.title);
+      if (attrs.title) attrs.slug = slugify(attrs.title);
     }
-  }
+  },
 
   // After saving a value.
   // Fired after an `insert` or `update` query.
